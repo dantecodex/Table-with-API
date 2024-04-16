@@ -1,0 +1,138 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.table-container {
+    width: 900px;
+}
+
+.navigate-table {
+    display: flex;
+    justify-content: space-between;
+}
+
+.table-function {
+    display: flex;
+    gap: 40px;
+}
+
+.sort-table {
+    position: relative;
+    user-select: none;
+
+    &:hover .sort-Content {
+        display: block;
+    }
+}
+
+.sort-table button {
+    background-color: #4CAF50;
+    color: white;
+    width: 100px;
+    padding: 12px 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.sort-table .sort-Content {
+    display: none;
+    position: absolute;
+    width: 100px;
+    background-color: #f9f9f9;
+    list-style: none;
+    text-align: left;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    color: black;
+    z-index: 1;
+}
+
+.sort-Content li {
+    padding: 12px 16px;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #d6d5d5;
+    }
+}
+
+.display-none {
+    display: none;
+}
+
+.show-table {
+    position: relative;
+    user-select: none;
+
+    &:hover .show-Content {
+        display: block;
+    }
+}
+
+.show-table button {
+    background-color: #4CAF50;
+    color: white;
+    width: 100px;
+    padding: 12px 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.show-table .show-Content {
+    display: none;
+    position: absolute;
+    width: 100px;
+    background-color: #f9f9f9;
+    list-style: none;
+    text-align: left;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    color: black;
+    z-index: 1;
+}
+
+.show-Content li {
+    padding: 12px 16px;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #d6d5d5;
+    }
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    table-layout: fixed;
+    text-align: center;
+}
+
+th,
+td {
+    border: 1px solid black;
+}
+
+.header th {
+    text-transform: capitalize;
+}
+
+.header #description {
+    width: 300px;
+}
+
+
+/* .page2 {
+    display: none;
+} */
+
+.page-count {
+    display: flex;
+    list-style: none;
+}
+
+.page-count li {
+    margin-left: 20px;
+    cursor: pointer;
+    padding: 8px 16px;
+    color: lightcoral;
+}
