@@ -3,6 +3,7 @@ const showItem = [3, 6, 9, 12, 15];
 const apiURL = 'https://dummyjson.com/products';
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Sort Product
     const sortList = document.querySelectorAll(".sort-Content li");
     sortList.forEach(list => {
         list.addEventListener("click", event => {
@@ -10,7 +11,23 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-   
+    // Show Hide Product
+    const showProduct = document.querySelectorAll(".show-Content li");
+    showProduct.forEach(content => {
+        content.addEventListener("click", event => {
+            let showProductNumber = event.target.textContent;
+            const allProduct = document.querySelectorAll(".primary-table > tbody > tr");
+
+            for (let index = 0; index < Number(showProductNumber); index++) {
+                const element = allProduct[index];
+                element.classList.remove("display-none");
+            }
+            for (let index = Number(showProductNumber); index < allProduct.length; index++) {
+                const element = allProduct[index];
+                element.classList.add("display-none");
+            }
+        })
+    });
 })
 
 boostrapTable();
@@ -90,7 +107,7 @@ function sortContent(category, result) {
             result.sort((a, b) => a[category] - b[category]);
             break;
         default:
-            // Default sorting logic
+
             break;
     }
     drawTable(result);
