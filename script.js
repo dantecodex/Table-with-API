@@ -1,6 +1,10 @@
 const columnList = ['brand', 'title', 'price', 'rating', 'stock'];
 const showItem = [3, 6, 9, 12, 15];
 const apiURL = 'https://dummyjson.com/products';
+const productPerPage = 15;
+let currentPage = 1;
+
+boostrapTable();
 
 document.addEventListener('DOMContentLoaded', () => {
     // Sort Product
@@ -28,9 +32,26 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         })
     });
+
+    // Page Navigation
+    let totalPages = Math.ceil(getSetData().length / 15);
+    let localData = getSetData();
+    document.querySelector(".prevPage").addEventListener("click", event => {
+        if (currentPage > 1) {
+            currentPage--;
+            drawTable(localData);
+        }
+    });
+    document.querySelector(".nextPage").addEventListener("click", event => {
+        if (currentPage < totalPages) {
+            currentPage++
+            drawTable(localData);
+        }
+    });
+
 })
 
-boostrapTable();
+
 function boostrapTable() {
     const sortContent = document.querySelector(".sort-Content");
     const showContent = document.querySelector(".show-Content");
@@ -117,18 +138,36 @@ function sortContent(category, result) {
 function drawTable(products) {
     const tableBody = document.querySelector(".primary-table tbody");
     let tableRows = ``;
-    for (const product of products) {
-
-        tableRows += `
-        <tr>
-        <td data-cell="brand">${product.brand}</td>
-        <td data-cell="title">${product.title}</td>
-        <td data-cell="description">${product.description}</td>
-        <td data-cell="price">$${product.price}</td>
-        <td data-cell="rating">${product.rating}</td>
-        <td data-cell="stock">${product.stock}</td>
-        </tr>
-        `;
+    let startIndex = (currentPage - 1) * productPerPage;
+    let lastIndex = startIndex + productPerPage;
+    if (products.length > productPerPage) {
+        for (let index = startIndex; index < lastIndex; index++) {
+            let product = products[index]
+            tableRows += `
+            <tr>
+            <td data-cell="brand">${product.brand}</td>
+            <td data-cell="title">${product.title}</td>
+            <td data-cell="description">${product.description}</td>
+            <td data-cell="price">$${product.price}</td>
+            <td data-cell="rating">${product.rating}</td>
+            <td data-cell="stock">${product.stock}</td>
+            </tr>
+            `;
+        }
+    }
+    else {
+        for (const product of products) {
+            tableRows += `
+            <tr>
+            <td data-cell="brand">${product.brand}</td>
+            <td data-cell="title">${product.title}</td>
+            <td data-cell="description">${product.description}</td>
+            <td data-cell="price">$${product.price}</td>
+            <td data-cell="rating">${product.rating}</td>
+            <td data-cell="stock">${product.stock}</td>
+            </tr>
+            `;
+        }
     }
     tableBody.innerHTML = tableRows;
 }
